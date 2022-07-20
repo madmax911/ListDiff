@@ -1,0 +1,153 @@
+<!doctype html><html lang="en"> <!--         All code written by Max Calcagno - maxone44@hotmail.com         --> <head>
+                <meta charset="utf-8"> <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+       <meta http-equiv="Expires" content="0"/><meta http-equiv="Pragma" content="no-cache"/> <title> ListDiff </title>
+
+                                                                                                <style type="text/css">
+/*---------------------------------------------------------------------------------------------*/
+
+/*CSS Reset */          * { margin: 0; padding: 0 }
+/*Local Default */ body { font: 10px/92% 'monospace' }
+
+                  div { position: absolute; overflow-x: hidden; border-style: solid; border-width: 1px;
+                        border-color: #AAA }
+        table, tr, td { white-space: nowrap; border-width: 1px; border-style: solid; 
+                        border-collapse: collapse; padding: 1px; border-color: #AAA }
+
+        button, input { opacity: 0.6 }
+
+           #tlt, #trt,
+           #blt, #brt { left: 0px; top: 0px; height: 99%; width: 100%; bottom:0px; right:0px;
+                        position:absolute; border-style: none; }
+
+/*----------------------------------------------------------------------------------------------*/</style></head><body>
+
+  <!--==    *  Form Controls  *     ==-->
+
+<div style="left:47%;  top:15%; z-index:3"><button type="button" onclick="DiffText()">Difference</button></div>
+<div style="left:47.3%;top:20%; z-index:3"><button type="button" onclick="CommonText()">Common</button></div>
+<div style="left:47.3%;top:25%; z-index:3"><button type="button" onclick="MergeText()">Merge</button></div>
+<div style="left:47%;  top:30%; z-index:3"><button type="button" onclick="GetDaysLater()">Days later</button></div>
+<div style="left:47%;  top:35%; z-index:3"><button type="button" onclick="GetDateDiff()">Date diff</button></div>
+
+<div style="left:3%;   top:48%; z-index:3"><button type="button" onclick="CountText()">Count</button></div>
+<div style="left:15%;  top:48%; z-index:3"><button type="button" onclick="SortText()">Sort</button></div>
+<div style="left:20%;  top:48%; z-index:3"><button type="button" onclick="SortUniqText()">Sort + uniq</button></div>
+<div style="left:29%;  top:48%; z-index:3"><button type="button" onclick="UniqText()">Uniq</button></div>
+<div style="left:36%;  top:48%; z-index:3"><button type="button" onclick="OddEvenText()">Odd/Even</button></div>
+
+<div style="left:70%;  top:48%; z-index:3"><button type="button" onclick="LowerCase()">Lower case</button></div>
+<div style="left:80%;  top:48%; z-index:3"><button type="button" onclick="UpperCase()">Upper case</button></div>
+
+<div style="left:48%;  top:65%; z-index:3"><button type="button" onclick="ReverseText()">Reverse</button></div>
+<div style="left:47%;  top:70%; z-index:3"><button type="button" onclick="Tab2Enter()">Tab -&gt; enter</button></div>
+<div style="left:47%;  top:75%; z-index:3"><button type="button" onclick="Enter2Tab()">Enter -&gt; tab</button></div>
+<div style="left:47%;  top:80%; z-index:3"><button type="button" onclick="Tab2Space()">Tab -&gt; space</button></div>
+<div style="left:47%;  top:85%; z-index:3"><button type="button" onclick="Space2Tab()">Space -&gt; tab</button></div>
+
+  <!-- boxes -->
+
+<div id="divTL" style="top:  0%; bottom: 50%; left:  0%; right: 50%; z-index: 2"><textarea id="tlt"></textarea></div>
+<div id="divTR" style="top:  0%; bottom: 50%; left: 50%; right:  0%; z-index: 2"><textarea id="trt"></textarea></div>
+<div id="divBL" style="top: 50%; bottom:  0%; left:  0%; right: 50%; z-index: 2"><textarea id="blt"></textarea></div>
+<div id="divBR" style="top: 50%; bottom:  0%; left: 50%; right:  0%; z-index: 2"><textarea id="brt"></textarea></div>
+
+<!--========================================================================================================--><script>
+
+function Tab2Enter()
+{
+  brt.value = blt.value.replace(/\t/g, '\n');
+}
+
+function Enter2Tab()
+{                             //  \r for win
+  brt.value = blt.value.replace(/[\r]/g, '').replace(/[\n]/g, '\t');
+}
+
+function Tab2Space()
+{
+  brt.value = blt.value.replace(/\t/g, ' ');
+}
+
+function Space2Tab()
+{
+  brt.value = blt.value.replace(/ /g, '\t');
+}
+
+function GetDateDiff()
+{
+  blt.value = Math.round(Math.abs((new Date(tlt.value) - new Date(trt.value)) / 1000 / 60 / 60 / 24));
+}
+
+function GetDaysLater()           //  Tip:  .toLocaleDateString()  mm/dd/yyyy
+{
+  brt.value = new Date((new Date(tlt.value)).valueOf() + parseFloat(trt.value) * 1000 * 60 * 60 * 24);
+}
+
+function DiffText()  //  blt = bottom left text
+{
+  blt.value = tlt.value.split('\n').filter(t => !trt.value.split('\n').includes(t)).join('\n');
+  brt.value = trt.value.split('\n').filter(t => !tlt.value.split('\n').includes(t)).join('\n');
+}
+
+function CommonText()
+{
+  blt.value = tlt.value.split('\n').filter(t => trt.value.split('\n').includes(t)).join('\n');
+}
+
+function MergeText()
+{
+  blt.value = MergeArrays(tlt.value.split('\n'), trt.value.split('\n')).join('\n');
+}
+
+  function MergeArrays(a1, a2)
+  {
+    let a3 = [];
+
+    a1.forEach((v,i) => { a3[i * 2] = v });
+    a2.forEach((v,i) => { a3[i * 2 + 1] = v });
+
+    return a3.filter(v => v);
+  }
+
+function CountText()
+{
+  blt.value = tlt.value.split('\n').length;
+}
+
+function SortText()
+{
+  blt.value = tlt.value.split('\n').sort().join('\n');
+}
+
+function SortUniqText()
+{
+  blt.value = [...(new Set(tlt.value.split('\n').sort()))].join('\n');
+}
+
+function UniqText()
+{
+  blt.value = [...(new Set(tlt.value.split('\n')))].join('\n');
+}
+
+function OddEvenText()
+{
+  blt.value = tlt.value.split('\n').filter((t,i) => (i % 2 === 0)).join('\n');  // even line
+  brt.value = tlt.value.split('\n').filter((t,i) => (i % 2 === 1)).join('\n');  // odd line
+}
+
+function LowerCase()
+{
+  brt.value = trt.value.toLowerCase();
+}
+
+function UpperCase()
+{
+  brt.value = trt.value.toUpperCase();
+}
+
+function ReverseText()
+{
+  brt.value = blt.value.split('\n').reverse().join('\n');
+}
+
+/*--------------------------------------------------------------------------------------------*/</script></body></html>
