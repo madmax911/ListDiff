@@ -14,4 +14,4 @@ This project really truly is a nod to the power of JavaScript alone without any 
 
 sort-and-uniq ... then enter-to-tab conversion
 (top left to bottom letf, bottom left to bottom right)
-<img src="ListDiff.png" />
+<img src="ListDiff2.png" />
