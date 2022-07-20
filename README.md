@@ -9,5 +9,9 @@ This supports many operations such as top-left can be sorted and uniq'ed -- it's
 
 This project really truly is a nod to the power of JavaScript alone without any frameworks or libraries.  Particularly the advanced array functions and string processing capabilities.
 
+2-way diff example:
 <img src="ListDiff.png" />
 
+sort-and-uniq ... then enter-to-tab conversion
+(top left to bottom letf, bottom left to bottom right)
+<img src="ListDiff.png" />
