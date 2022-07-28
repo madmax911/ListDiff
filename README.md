@@ -9,6 +9,8 @@ This supports many operations such as top-left can be sorted and uniq'ed -- it's
 
 This project really truly is a nod to the power of JavaScript alone without any frameworks or libraries.  Particularly the advanced array functions and string processing capabilities.
 
+<a href="https://htmlpreview.github.io/?https://github.com/madmax911/ListDiff/blob/main/ListDiff.html">Try it out yourself.</a>
+
 2-way diff example:
 <img src="ListDiff.png" />
 
