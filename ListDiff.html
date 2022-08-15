@@ -49,12 +49,12 @@
 <table>
   <tr><td><textarea id="tlt"></textarea></td>
     <td class="ctrv">
-      <button type="button" onclick="DiffText()">Difference</button>
-      <button type="button" onclick="CommonText()">Common</button>
-      <button type="button" onclick="MergeText()">Merge</button>
-      <button type="button" onclick="Grep()">Grep</button>
-      <button type="button" onclick="GetDaysLater()">Days later</button>
-      <button type="button" onclick="GetDateDiff()">Date diff</button>
+      <button type="button" onclick="DiffText()" id="btnDifference">Difference</button>
+      <button type="button" onclick="CommonText()" id="btnCommon">Common</button>
+      <button type="button" onclick="MergeText()" id="btnMerge">Merge</button>
+      <button type="button" onclick="Grep()" id="btnGrep">Grep</button>
+      <button type="button" onclick="GetDaysLater()" id="btnDaysLater">Days later</button>
+      <button type="button" onclick="GetDateDiff()" id="btnDateDiff">Date diff</button>
     </td>
     <td>
       <textarea id="trt"></textarea>
@@ -62,19 +62,19 @@
   </tr>
   <tr>
     <td class="ctrh">
-      <button type="button" onclick="CountText()">Count</button>
-      <button type="button" onclick="SortText()">Sort</button>
-      <button type="button" onclick="SortUniqText()">Sort + uniq</button>
-      <button type="button" onclick="UniqText()">Uniq</button>
-      <button type="button" onclick="OddEvenText()">Odd/Even</button>
+      <button type="button" onclick="CountText()" id="btnCount">Count</button>
+      <button type="button" onclick="SortText()" id="btnSort">Sort</button>
+      <button type="button" onclick="SortUniqText()" id="btnSortUniq">Sort + uniq</button>
+      <button type="button" onclick="UniqText()" id="btnUniq">Uniq</button>
+      <button type="button" onclick="OddEvenText()" id="btnOddEven">Odd/Even</button>
     </td>
     <td class="ctrh">
-      <button type="button" onclick="Help()">Help</button>
+      <button type="button" onclick="Help()" id="btnHelp">Help</button>
     </td>
     <td class="ctrh">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button type="button" onclick="LowerCase()">Lower case</button>
-      <button type="button" onclick="UpperCase()">Upper case</button>
+      <button type="button" onclick="LowerCase()" id="btnLowerCase">Lower case</button>
+      <button type="button" onclick="UpperCase()" id="btnUpperCase">Upper case</button>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </td>
   </tr>
@@ -83,11 +83,11 @@
       <textarea id="blt"></textarea>
     </td>
     <td class="ctrv">
-      <button type="button" onclick="ReverseText()">Reverse</button>
-      <button type="button" onclick="Tab2Enter()">Tab -&gt; enter</button>
-      <button type="button" onclick="Enter2Tab()">Enter -&gt; tab</button>
-      <button type="button" onclick="Tab2Space()">Tab -&gt; space</button>
-      <button type="button" onclick="Space2Tab()">Space -&gt; tab</button>
+      <button type="button" onclick="ReverseText()" id="btnReverseText">Reverse</button>
+      <button type="button" onclick="Tab2Enter()" id="btnTab2Enter">Tab -&gt; enter</button>
+      <button type="button" onclick="Enter2Tab()" id="btnEnter2Tab">Enter -&gt; tab</button>
+      <button type="button" onclick="Tab2Space()" id="btnTab2Space">Tab -&gt; space</button>
+      <button type="button" onclick="Space2Tab()" id="btnSpace2Tab">Space -&gt; tab</button>
     </td>
     <td>
       <textarea id="brt"></textarea>
@@ -248,38 +248,35 @@ function Help()
 
   ----------------------------------
 
-  Here are the buttons and what they
-  do:
+  To find out what the buttons do,
+  hover the mouse over them.
+  `;
 
-  [Difference]
+  btnHelp.title = `  Bring up this screen in top-left
+  text window.`;
 
-  Compares the top windows line-by-
+  btnDifference.title = `  Compares the top windows line-by-
   line shows the differences between
-  them in the windows below.
+  them in the windows below.`;
 
-  [Common]
-
-  Like [Difference] except it finds
+  btnCommon.title = `  Like [Difference] except it finds
   the lines the top two windows have
   in common.  It puts that into the
-  bottom-left
+  bottom-left`;
 
-  [Merge]
-
-  This alternates line-by-line from
+  btnMerge.title = `  This alternates line-by-line from
   the two top lists combining them.
   The "zipped" output is sent to the
-  bottom left.
+  bottom left.`;
 
-  [Grep]
-
-  This searches lines of top-left
+  btnGrep.title = `  This searches lines of top-left
   and outputs only lines containing
   the string in the top-right.
+  Bottom-left will contain all
+  matching lines.  Bottom-right,
+  all non-matching`;
 
-  [Days later]
-
-  Performs simple date addition.
+  btnDaysLater.title = `  Performs simple date addition.
 
   Eg:
 
@@ -289,104 +286,72 @@ function Help()
   bottom-left will be...
 
   Thu Aug 18 2022 00:00:00 GMT-0400
-  (Eastern Daylight Time)
+  (Eastern Daylight Time)`;
 
-  [Date diff]
-
-  Opposite of [Days later].  2 dates
+  btnDateDiff.title = `  Opposite of [Days later].  2 dates
   in mm/dd/yyyy in the top boxes
   will result in the difference
   between them in days.  This will
-  be sent to the bottom-left text,
+  be sent to the bottom-left text,`;
 
-  [Help]
-
-  Bring up this screen in top-left
-  text window.
-
-  [Count]
-
-  Counts the number of lines in top-
+  btnCount.title = `  Counts the number of lines in top-
   left text and puts that number in
-  bottom-left text.
+  bottom-left text.`;
 
-  [Sort]
-
-  Sorts top-left text alphabetically
+  btnSort.title = `  Sorts top-left text alphabetically
   and put the results in bottom-left
-  text.
+  text.`;
 
-  [Uniq]
-
-  Reads the lines in top-left text
+  btnUniq.title = `  Reads the lines in top-left text
   and retrieves only unique lines,
-  eliminating any duplicates.
+  eliminating any duplicates.`;
 
-  [Sort + uniq]
-
-  Just as it sounds.  First [Sort]
-  the data then [Uniq] it.
-
-  [Odd/Even]
-
-  In the top-left text, separate
+  btnSortUniq.title = `  Just as it sounds.  First [Sort]
+  the data then [Uniq] it.`;
+  
+  btnOddEven.title = `  In the top-left text, separate
   all the odd line numbers into
   bottom-left text and the odd lines
-  into bottom-right text.
+  into bottom-right text.`;
 
-  [Lower case]
-
-  Convert all text in top-right text
+  btnLowerCase.title = `  Convert all text in top-right text
   to lower case and store in bottom-
-  right text.
+  right text.`;
 
-  [Upper case]
-
-  Convert all text in top-right text
+  btnUpperCase.title = `  Convert all text in top-right text
   to upper case and store in bottom-
-  right text.
+  right text.`;
 
-  [Reverse]
-
-  Take the lines in bottom-left text
+  btnReverseText.title = `  Take the lines in bottom-left text
   and reverse them.  (line 1 starts
   at bottom now)  It will store it
-  in bottom-right text.
+  in bottom-right text.`;
 
-  [Tab -> enter]
-
-  Will convert a tab delimited line
+  btnTab2Enter.title = `  Will convert a tab delimited line
   of text and convert it to an enter
   delimited list.
 
   So, it
   Reads from:  bottom-left text,
-  Writes to:  bottom-right text.
+  Writes to:  bottom-right text.`;
 
-  [Enter -> tab]
-
-  Will convert an enter delimited
-  line of text and convert it to a
-  delimited list.
+  btnEnter2Tab.title = `  Will convert an enter delimited
+  text and convert it to a tab
+  delimited single line.
 
   Reads from:  bottom-left text,
-  Writes to:  bottom-right text.
+  Writes to:  bottom-right text.`;
 
-  [Tab -> Space]
-
-  Convert all tabs to single spaces.
+  btnTab2Space.title = `  Convert all tabs to single spaces.
 
   Reads from:  bottom-left text,
-  Writes to:  bottom-right text.
+  Writes to:  bottom-right text.`;
 
-  [Space -> Tab]
-
-  Convert all single spaces to tabs.
+  btnSpace2Tab.title = `  Convert all single spaces to tabs.
 
   Reads from:  bottom-left text,
-  Writes to:  bottom-right text.
+  Writes to:  bottom-right text.`;
 
-  `;
 
   // tlt.scrollTop = tlt.scrollHeight;
 }
