@@ -7,6 +7,26 @@
 
   /* * { border-width: 1px; border-style: solid; border-color: black; } */
 
+  @media (prefers-color-scheme: dark)
+  {
+    body,
+    button,
+    input,
+    textarea { background: #111122; color: #DDDDFF; }
+
+    button { background-color: #4757AA; color: #FFFFCC }
+  }
+
+  @media (prefers-color-scheme: light)
+  {
+    body,
+    button,
+    input,
+    textarea { background: #FFFFFF; color: #000088; }
+
+    button { background-color: #D7DBE1; color: #3A4A99 }
+  }
+
   body { font-family: 'monospace'; }
 
   html { height: 99%; }
@@ -15,7 +35,7 @@
   table    { width: 100%; height: 100%; }
   textarea { width: 100%; height: 44vh; }
 
-  button { margin: 4px; }
+  button { margin: 4px; border: none; }
 
   .ctrv { text-align: center; width: 1px;
           vertical-align: middle; }
