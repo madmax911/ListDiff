@@ -69,7 +69,7 @@
       <button type="button" onclick="OddEvenText()">Odd/Even</button>
     </td>
     <td class="ctrh">
-      
+      <button type="button" onclick="Help()">Help</button>
     </td>
     <td class="ctrh">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -198,6 +198,197 @@ function UpperCase()
 function ReverseText()
 {
   brt.value = blt.value.split('\n').reverse().join('\n');
+}
+
+function Help()
+{
+  tlt.value = `
+  ----------------------------------
+
+  Welcome to ListDiff.
+
+  The buttons on the page represent
+  operators and the text boxes serve
+  as the operand(s).  The upper-left
+  text boxes are the inputs and the
+  lower right are the outputs.
+
+  This was designed by Max Calcagno.
+  
+  Reason: I wanted a light-weight
+  simple tool that took advantage of
+  the great text processing power of
+  JavaScript in the modern browser.
+
+  Feel free to use this tool for
+  your text processing needs.
+
+  ----------------------------------
+
+  These functions buttons operate on
+  one or more of the text windows in
+  a line-by-line fashion.  The func-
+  tions require 1 or 2 inputs and
+  can have 1 or 2 outputs.  If the
+  input is at the top left then the
+  output will either be to the left
+  of or below if both inputs are on
+  top.
+
+  Example:  The [Count] button
+
+  1 input 1 output:
+
+  Data direction:
+    top-left -> bottom-left
+
+  Counts the number of lines in top-
+  left text and puts that number in
+  bottom-left text.
+
+  ----------------------------------
+
+  Here are the buttons and what they
+  do:
+
+  [Difference]
+
+  Compares the top windows line-by-
+  line shows the differences between
+  them in the windows below.
+
+  [Common]
+
+  Like [Difference] except it finds
+  the lines the top two windows have
+  in common.  It puts that into the
+  bottom-left
+
+  [Merge]
+
+  This alternates line-by-line from
+  the two top lists combining them.
+  The "zipped" output is sent to the
+  bottom left.
+
+  [Grep]
+
+  This searches lines of top-left
+  and outputs only lines containing
+  the string in the top-right.
+
+  [Days later]
+
+  Performs simple date addition.
+
+  Eg:
+
+  top-left =  08/15/2022
+  top-right = 3
+
+  bottom-left will be...
+
+  Thu Aug 18 2022 00:00:00 GMT-0400
+  (Eastern Daylight Time)
+
+  [Date diff]
+
+  Opposite of [Days later].  2 dates
+  in mm/dd/yyyy in the top boxes
+  will result in the difference
+  between them in days.  This will
+  be sent to the bottom-left text,
+
+  [Help]
+
+  Bring up this screen in top-left
+  text window.
+
+  [Count]
+
+  Counts the number of lines in top-
+  left text and puts that number in
+  bottom-left text.
+
+  [Sort]
+
+  Sorts top-left text alphabetically
+  and put the results in bottom-left
+  text.
+
+  [Uniq]
+
+  Reads the lines in top-left text
+  and retrieves only unique lines,
+  eliminating any duplicates.
+
+  [Sort + uniq]
+
+  Just as it sounds.  First [Sort]
+  the data then [Uniq] it.
+
+  [Odd/Even]
+
+  In the top-left text, separate
+  all the odd line numbers into
+  bottom-left text and the odd lines
+  into bottom-right text.
+
+  [Lower case]
+
+  Convert all text in top-right text
+  to lower case and store in bottom-
+  right text.
+
+  [Upper case]
+
+  Convert all text in top-right text
+  to upper case and store in bottom-
+  right text.
+
+  [Reverse]
+
+  Take the lines in bottom-left text
+  and reverse them.  (line 1 starts
+  at bottom now)  It will store it
+  in bottom-right text.
+
+  [Tab -> enter]
+
+  Will convert a tab delimited line
+  of text and convert it to an enter
+  delimited list.
+
+  So, it
+  Reads from:  bottom-left text,
+  Writes to:  bottom-right text.
+
+  [Enter -> tab]
+
+  Will convert an enter delimited
+  line of text and convert it to a
+  delimited list.
+
+  Reads from:  bottom-left text,
+  Writes to:  bottom-right text.
+
+  [Tab -> Space]
+
+  Convert all tabs to single spaces.
+
+  Reads from:  bottom-left text,
+  Writes to:  bottom-right text.
+
+  [Space -> Tab]
+
+  Convert all single spaces to tabs.
+
+  Reads from:  bottom-left text,
+  Writes to:  bottom-right text.
+
+  `;
+
+  // tlt.scrollTop = tlt.scrollHeight;
 }
 
 /*--------------------------------------------------------------------------------------------*/</script></body></html>
