@@ -32,6 +32,7 @@
       <button type="button" onclick="DiffText()">Difference</button>
       <button type="button" onclick="CommonText()">Common</button>
       <button type="button" onclick="MergeText()">Merge</button>
+      <button type="button" onclick="Grep()">Grep</button>
       <button type="button" onclick="GetDaysLater()">Days later</button>
       <button type="button" onclick="GetDateDiff()">Date diff</button>
     </td>
@@ -131,6 +132,12 @@ function MergeText()
 
     return a3.filter(v => v);
   }
+
+function Grep()
+{
+  brt.value = tlt.value.split('\n').filter(v => !v.includes(trt.value)).join('\n');
+  blt.value = tlt.value.split('\n').filter(v =>  v.includes(trt.value)).join('\n');
+}
 
 function CountText()
 {
