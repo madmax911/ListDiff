@@ -1,103 +1,107 @@
-<!doctype html><html lang="en"> <!--         All code written by Max Calcagno - maxone44@hotmail.com         --> <head>
-                <meta charset="utf-8"> <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-       <meta http-equiv="Expires" content="0"/><meta http-equiv="Pragma" content="no-cache"/> <title> ListDiff </title>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
-                                                                                                <style type="text/css">
-/*---------------------------------------------------------------------------------------------*/
+    <title>CSS Grid</title>
+  </head>
+  <style>
 
-  /* * { border-width: 1px; border-style: solid; border-color: black; } */
+    @media (prefers-color-scheme: dark)
+    {
+      body, input, textarea, nav, main,
+      section { background-color: #111122; color: #DDDDFF; }
 
-  * { font-size: 14px; }
+       button { background-color: #4757AA; color: #FFFFCC; }
+    }
 
-  @media (prefers-color-scheme: dark)
-  {
-    body,
-    button,
-    input,
-    textarea { background: #111122; color: #DDDDFF; }
+    @media (prefers-color-scheme: light)
+    {
+      body, input, textarea, nav, main,
+      section { background-color: #FFFFFF; color: #000088; }
 
-    button { background-color: #4757AA; color: #FFFFCC }
-  }
+       button { background-color: #D7DBE1; color: #3A4A99; }
+    }
 
-  @media (prefers-color-scheme: light)
-  {
-    body,
-    button,
-    input,
-    textarea { background: #FFFFFF; color: #000088; }
+       body { margin: 0; padding: 0; font-family: monospace; }  
 
-    button { background-color: #D7DBE1; color: #3A4A99 }
-  }
+   textarea { font-size: calc((1vh + 1vw) / 2 + 0.2rem); }  /* vh = % of view width */
 
-  body { font-family: 'monospace'; }
+     button { font-size: calc((1.5vh + 1.5vw) / 2  + 0.1rem);
+              border-radius: calc((0.5vh + 0.5vw) / 2);
+              border: none; }
 
-  html { height: 99%; }
-  body { height: 97%; width: 98%; }
+    main,
+    section { border-style: solid; border-width: 1px; }
+       main { border-color: black; }
+    section { border-color: blue; } /* superficial stuff above
+       --------------------------------------------------
+       Below is necessary to make the grid flexible */
 
-  table    { width: 100%; height: 100%; }
-  textarea { width: 100%; height: 44vh; font-size: 11px; border-radius: 12px; }
+       main { display: grid;
+              grid-template-rows:    auto 10vh auto;
+              grid-template-columns: auto 10vw auto;
+              position: absolute;
+              
+                           top: 0; 
+              left: 0;              right: 0;
+                        bottom: 0;            }
 
-  button { margin: 4px; border: none; border-radius: 4px; }
+        nav { display: block; margin: auto; }
+    section { display: flex; }
 
-  .ctrv { text-align: center; width: 1px;
-          vertical-align: middle; }
+        nav { align-items: center;
+              justify-content: center;
+              text-align: center;
+              vertical-align: middle; }
 
-  .ctrh { text-align: center; height: 1px;
-          vertical-align: middle;
-          white-space: nowrap; }
+   textarea { width: 100%; }
 
-/*----------------------------------------------------------------------------------------------*/</style></head><body>
+  </style>
+  <body>
 
-<table>
-  <tr><td><textarea id="tlt"></textarea></td>
-    <td class="ctrv">
-      <button type="button" onclick="DiffText()" id="btnDifference">Difference</button>
-      <button type="button" onclick="CommonText()" id="btnCommon">Common</button>
-      <button type="button" onclick="MergeText()" id="btnMerge">Merge</button>
-      <button type="button" onclick="Grep()" id="btnGrep">Grep</button>
-      <button type="button" onclick="GetDaysLater()" id="btnDaysLater">Days later</button>
-      <button type="button" onclick="GetDateDiff()" id="btnDateDiff">Date diff</button>
-    </td>
-    <td>
-      <textarea id="trt"></textarea>
-    </td>
-  </tr>
-  <tr>
-    <td class="ctrh">
-      <button type="button" onclick="CountText()" id="btnCount">Count</button>
-      <button type="button" onclick="SortText()" id="btnSort">Sort</button>
-      <button type="button" onclick="SortUniqText()" id="btnSortUniq">Sort + uniq</button>
-      <button type="button" onclick="UniqText()" id="btnUniq">Uniq</button>
-      <button type="button" onclick="OddEvenText()" id="btnOddEven">Odd/Even</button>
-    </td>
-    <td class="ctrh">
-      <button type="button" onclick="Help()" id="btnHelp">Help</button>
-    </td>
-    <td class="ctrh">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button type="button" onclick="LowerCase()" id="btnLowerCase">Lower case</button>
-      <button type="button" onclick="UpperCase()" id="btnUpperCase">Upper case</button>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <textarea id="blt"></textarea>
-    </td>
-    <td class="ctrv">
-      <button type="button" onclick="ReverseText()" id="btnReverseText">Reverse</button>
-      <button type="button" onclick="Tab2Enter()" id="btnTab2Enter">Tab -&gt; enter</button>
-      <button type="button" onclick="Enter2Tab()" id="btnEnter2Tab">Enter -&gt; tab</button>
-      <button type="button" onclick="Tab2Space()" id="btnTab2Space">Tab -&gt; space</button>
-      <button type="button" onclick="Space2Tab()" id="btnSpace2Tab">Space -&gt; tab</button>
-    </td>
-    <td>
-      <textarea id="brt"></textarea>
-    </td>
-  </tr>
-</table>
+    <main>
+      <section><textarea id="tlt"></textarea></section>
+      <nav>
+        <button type="button" onclick="DiffText()" id="btnDifference">Difference</button><br><br>
+        <button type="button" onclick="CommonText()" id="btnCommon">Common</button><br><br>
+        <button type="button" onclick="MergeText()" id="btnMerge">Merge</button><br><br>
+        <button type="button" onclick="Grep()" id="btnGrep">Grep</button><br><br>
+        <button type="button" onclick="GetDaysLater()" id="btnDaysLater">Days later</button><br><br>
+        <button type="button" onclick="GetDateDiff()" id="btnDateDiff">Date diff</button><br><br>
+      </nav>
+      <section><textarea id="trt"></textarea></section>
+      <nav>
+        <button type="button" onclick="CountText()" id="btnCount">Count</button>
+        <button type="button" onclick="SortText()" id="btnSort">Sort</button>
+        <button type="button" onclick="SortUniqText()" id="btnSortUniq">Sort + uniq</button>
+        <button type="button" onclick="UniqText()" id="btnUniq">Uniq</button>
+        <button type="button" onclick="OddEvenText()" id="btnOddEven">Odd/Even</button>
+      </nav>
+      <nav>
+        <button type="button" onclick="Help()" id="btnHelp">Help</button>
+      </nav>
+      <nav>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" onclick="LowerCase()" id="btnLowerCase">Lower case</button>
+        <button type="button" onclick="UpperCase()" id="btnUpperCase">Upper case</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </nav>
+      <section><textarea id="blt"></textarea></section>
+      <nav>
+        <button type="button" onclick="ReverseText()" id="btnReverseText">Reverse</button><br><br>
+        <button type="button" onclick="Tab2Enter()" id="btnTab2Enter">Tab -&gt; enter</button><br><br>
+        <button type="button" onclick="Enter2Tab()" id="btnEnter2Tab">Enter -&gt; tab</button><br><br>
+        <button type="button" onclick="Tab2Space()" id="btnTab2Space">Tab -&gt; space</button><br><br>
+        <button type="button" onclick="Space2Tab()" id="btnSpace2Tab">Space -&gt; tab</button><br><br>
+      </nav>
+      <section><textarea id="brt"></textarea></section>
+    </main>
 
-<!--========================================================================================================--><script>
+  <script>
+
+/* ----------------------------------------------------------------------------- */
 
 function Tab2Enter()
 {
@@ -379,4 +383,8 @@ btnSpace2Tab.title =
 Reads from:  bottom-left text,
 Writes to:  bottom-right text.`;
 
-/*--------------------------------------------------------------------------------------------*/</script></body></html>
+
+  </script>
+
+  </body>
+</html>
